@@ -1,0 +1,99 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "menu"
+    label: "Menu / القائمة"
+    files:
+      - file: "menu-data.json"
+        label: "All Menu Items / جميع الأصناف"
+        name: "menu-data"
+        format: "json"
+        fields:
+          - label: "Menu Items / الأصناف"
+            name: "items"
+            widget: "list"
+            fields:
+              - label: "Category / الفئة"
+                name: "category"
+                widget: "string"
+
+              - label: "Arabic Name / الاسم بالعربي"
+                name: "name_ar"
+                widget: "string"
+
+              - label: "English Name / الاسم بالإنجليزية"
+                name: "name_en"
+                widget: "string"
+
+              - label: "Description Arabic / الوصف بالعربي"
+                name: "description_ar"
+                widget: "text"
+                required: false
+
+              - label: "Description English / الوصف بالإنجليزية"
+                name: "description_en"
+                widget: "text"
+                required: false
+
+              - label: "Price / السعر"
+                name: "price"
+                widget: "number"
+                value_type: "float"
+
+              - label: "Photo / الصورة"
+                name: "image"
+                widget: "image"
+                required: false
+
+  - name: "settings"
+    label: "Store Settings / إعدادات المتجر"
+    files:
+      - file: "site-settings.json"
+        label: "Store Settings / إعدادات المتجر"
+        name: "site-settings"
+        format: "json"
+        fields:
+          - label: "WhatsApp Number"
+            name: "whatsapp"
+            widget: "string"
+
+          - label: "Phone Display"
+            name: "phone_display"
+            widget: "string"
+
+          - label: "Google Maps URL"
+            name: "map_url"
+            widget: "string"
+
+          - label: "Google Maps Embed"
+            name: "map_embed"
+            widget: "string"
+
+          - label: "Arabic Address / العنوان بالعربي"
+            name: "address_ar"
+            widget: "string"
+
+          - label: "English Address"
+            name: "address_en"
+            widget: "string"
+
+          - label: "Short Arabic Location"
+            name: "location_short_ar"
+            widget: "string"
+
+          - label: "Short English Location"
+            name: "location_short_en"
+            widget: "string"
+
+          - label: "Logo / الشعار"
+            name: "logo"
+            widget: "image"
+
+          - label: "Storefront / صورة المحل"
+            name: "storefront"
+            widget: "image"
