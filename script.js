@@ -1,6 +1,9 @@
+(async()=>{
 
 
-const menu=window.MENU;
+const site=await fetch("site-settings.json").then(r=>r.json());
+const menuData=await fetch("menu-data.json").then(r=>r.json());
+const menu=menuData.items || [];
 let cat="all",q="",cart=[],lang="ar";
 
 const UI={
@@ -140,9 +143,22 @@ document.getElementById("whatsapp").onclick=()=>{
  });
  const total=cart.reduce((s,i)=>s+menu[i].price,0);
  text+=`\nالإجمالي / Total: ${total} SAR\n`;
- text+="\nالعنوان / Location: 4058-4040 شارع المتنبي، حي الروضة، تبوك 47711 / 4058-4040 Al Mutanabbi, Al Rawdah, Tabuk 47711";
- text+="\nهاتف / Phone: 054 651 0807";
- location.href=`https://wa.me/966546510807?text=${encodeURIComponent(text)}`;
+ text+=`\nالعنوان / Location: ${site.address_ar} / ${site.address_en}`;
+ text+=`\nهاتف / Phone: ${site.phone_display}`;
+ location.href=`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 };
 
+// Apply editable business settings from Admin
+document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{a.href=`https://wa.me/${site.whatsapp}`;});
+document.querySelectorAll('a[href*="google.com/maps"], a[href*="maps.google.com"]').forEach(a=>{a.href=site.map_url;});
+const frame=document.querySelector('iframe[title*="location"], iframe[title*="Location"]');
+if(frame) frame.src=site.map_embed;
+document.querySelectorAll('img[src*="logo"]').forEach(img=>img.src=site.logo);
+document.querySelectorAll('img[src*="storefront"]').forEach(img=>img.src=site.storefront);
+document.querySelectorAll('.address').forEach(el=>el.innerHTML=`${site.address_ar}<br>${site.address_en}`);
+document.querySelectorAll('.links a').forEach((a,i)=>{if(i===0)a.textContent=site.phone_display;});
+
+window.add=add; window.removeAt=removeAt; window.changeQty=changeQty;
 applyLang();
+
+})();
