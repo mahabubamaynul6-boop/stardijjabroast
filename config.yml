@@ -1,0 +1,48 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+locale: "ar"
+collections:
+  - name: "menu"
+    label: "Menu / القائمة"
+    editor:
+      preview: false
+    files:
+      - label: "All Menu Items / كل الأصناف"
+        name: "menu-data"
+        file: "menu-data.json"
+        format: "json"
+        fields:
+          - label: "Items / الأصناف"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.en}} — {{fields.price}} SAR"
+            fields:
+              - {label: "Category / القسم", name: "c", widget: "select", options: [broast, burger, meals, sandwich, drinks]}
+              - {label: "Arabic name / الاسم العربي", name: "ar", widget: "string"}
+              - {label: "English name / الاسم الإنجليزي", name: "en", widget: "string"}
+              - {label: "Description / الوصف", name: "d", widget: "string", required: false}
+              - {label: "Price / السعر (SAR)", name: "price", widget: "number", value_type: "float"}
+              - {label: "Photo / الصورة", name: "img", widget: "image", required: false}
+  - name: "settings"
+    label: "Store Settings / إعدادات المتجر"
+    editor:
+      preview: false
+    files:
+      - label: "Business Info / معلومات المتجر"
+        name: "site-settings"
+        file: "site-settings.json"
+        format: "json"
+        fields:
+          - {label: "WhatsApp number / رقم واتساب", name: "whatsapp", widget: "string"}
+          - {label: "Phone display / رقم الهاتف", name: "phone_display", widget: "string"}
+          - {label: "Google Maps URL / رابط الموقع", name: "map_url", widget: "string"}
+          - {label: "Map embed / خريطة الموقع", name: "map_embed", widget: "string"}
+          - {label: "Arabic address / العنوان العربي", name: "address_ar", widget: "string"}
+          - {label: "English address / العنوان الإنجليزي", name: "address_en", widget: "string"}
+          - {label: "Short Arabic location / الموقع المختصر بالعربي", name: "location_short_ar", widget: "string"}
+          - {label: "Short English location / الموقع المختصر بالإنجليزي", name: "location_short_en", widget: "string"}
+          - {label: "Logo / الشعار", name: "logo", widget: "image"}
+          - {label: "Storefront photo / صورة المحل", name: "storefront", widget: "image"}
